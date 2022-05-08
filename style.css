@@ -1,0 +1,101 @@
+.container {
+  margin: 0 auto;
+  padding: 0 40px;
+  max-width: 1000px;
+}
+.container .wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+  margin: 0 auto;
+  width: 700px;
+}
+.container .wrap h2.name {
+  margin: 0;
+  font-size: 30px;
+  color: #3e88a3;
+}
+.container .wrap textarea {
+  padding: 10px;
+  width: 100%;
+  height: 230px;
+  font-size: 18px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  overflow: auto;
+}
+.container .wrap .keyboard {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 5px;
+  padding: 5px;
+  width: 100%;
+  border: 3px solid black;
+  border-radius: 5px;
+  background: #a8a7a7;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.container .wrap .keyboard .keys {
+  line-height: 40px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  border-radius: 5px;
+  background: #666666;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+.container .wrap .keyboard .keys:hover {
+  background: #6e9555;
+}
+.container .wrap .keyboard .keys:active {
+  border-radius: 20px;
+  background: #7ccd4a;
+}
+.container .wrap .keyboard .dark {
+  background: #282828;
+}
+.container .wrap .keyboard .long {
+  width: 95px;
+}
+.container .wrap .keyboard .middle {
+  width: 82px;
+}
+.container .wrap .keyboard .small {
+  width: 48px;
+}
+.container .wrap .keyboard .very_long {
+  width: 320px;
+}
+.container .wrap .keyboard .active {
+  border-radius: 20px;
+  background: #7ccd4a;
+}
+.container .wrap .text {
+  margin: 0;
+  font-size: 18px;
+}
