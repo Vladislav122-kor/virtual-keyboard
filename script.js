@@ -28,6 +28,7 @@ p.innerHTML = 'Клавиатура создана в операционной �
 
 let placeholder = '';
 let ctrlIsPressed = false;
+let shiftIsPressed = false;
 if (!localStorage.getItem('lang')) {
     localStorage.setItem("lang", 'english');
 }
@@ -46,6 +47,14 @@ class Keyboard {
         this.russian = ['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace', 'Tab', 'й', 'ц', 
         'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\', 'Del', 'CapsLock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 
         'л', 'д', 'ж', "э", 'Enter', 'Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', '', 'Shift', 'Ctrl', 
+        'Win', 'Alt', '', 'Alt', '', '', '', 'Ctrl'];
+        this.englishShift = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', 'Backspace', 'Tab', 'Q', 
+        'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', '|', 'Del', 'CapsLock', 'A', 'S', 'D', 'F', 'G', 'H', 
+        'J', 'K', 'L', ':', '"', 'Enter', 'Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', '', 'Shift', 'Ctrl', 
+        'Win', 'Alt', '', 'Alt', '', '', '', 'Ctrl'];
+        this.russianShift = ['Ё', '!', '"', '№', ';', '%', ':', '?', '*', '(', ')', '_', '+', 'Backspace', 'Tab', 'Й', 
+        'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', '/', 'Del', 'CapsLock', 'Ф', 'Ы', 'В', 'А', 'П', 'Р', 
+        'О', 'Л', 'Д', 'Ж', 'Э', 'Enter', 'Shift', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', ',', '', 'Shift', 'Ctrl', 
         'Win', 'Alt', '', 'Alt', '', '', '', 'Ctrl'];
         this.code = ['Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 
         'Digit9', 'Digit0', 'Minus', 'Equal', 'Backspace', 'Tab', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 
@@ -79,8 +88,48 @@ class Keyboard {
     makeValues() {
         this.lang = localStorage.getItem('lang');
         let collection = document.querySelectorAll('.keys');
-        for (let i = 0; i < collection.length; i++) {
-            collection[i].innerHTML = this[localStorage.getItem('lang')][i];
+        if (shiftIsPressed) {
+            if (localStorage.getItem('lang') === 'english' && document.querySelector('[data-code=CapsLock]').className !== 'keys dark long active') {
+                for (let i = 0; i < collection.length; i++) {
+                    collection[i].innerHTML = this.englishShift[i];
+                }
+            }
+            else if (localStorage.getItem('lang') === 'english' && document.querySelector('[data-code=CapsLock]').className === 'keys dark long active') {
+                for (let i = 0; i < collection.length; i++) {
+                    if (/^[a-zA-Z]+$/.test(this.englishShift[i]) && this.englishShift[i].length === 1) {
+                        collection[i].innerHTML = this.englishShift[i].toLowerCase();
+                    } else {
+                        collection[i].innerHTML = this.englishShift[i];
+                    }
+                }
+            }
+            else if (localStorage.getItem('lang') === 'russian' && document.querySelector('[data-code=CapsLock]').className !== 'keys dark long active') {
+                for (let i = 0; i < collection.length; i++) {
+                    collection[i].innerHTML = this.russianShift[i];
+                }
+            }
+            else if (localStorage.getItem('lang') === 'russian' && document.querySelector('[data-code=CapsLock]').className === 'keys dark long active') {
+                for (let i = 0; i < collection.length; i++) {
+                    if (/^[а-яёА-ЯЁ]+$/.test(this.russianShift[i]) && this.russianShift[i].length === 1) {
+                        collection[i].innerHTML = this.russianShift[i].toLowerCase();
+                    } else {
+                        collection[i].innerHTML = this.russianShift[i];
+                    }
+                }
+            }
+        }
+        else if (document.querySelector('[data-code=CapsLock]').className === 'keys dark long active') {
+            for (let i = 0; i < collection.length; i++) {
+                if (collection[i].innerHTML.length === 1 && /^[a-zA-Z]+$/.test(collection[i].innerHTML) || /^[а-яёА-ЯЁ]+$/.test(collection[i].innerHTML)) {
+                    collection[i].innerHTML = this[localStorage.getItem('lang')][i].toUpperCase();
+                } else {
+                    collection[i].innerHTML = this[localStorage.getItem('lang')][i];
+                }
+            }
+        } else {
+            for (let i = 0; i < collection.length; i++) {
+                collection[i].innerHTML = this[localStorage.getItem('lang')][i];
+            }
         }
     }
     
@@ -93,6 +142,10 @@ class Keyboard {
         else if (value.target.getAttribute('data-code') === 'Enter') {
             placeholder = placeholder.slice(0, cursor) + '\n' + placeholder.slice(cursor);
             cursor++;
+        }
+        else if (value.target.getAttribute('data-code') === 'ShiftLeft' || value.target.getAttribute('data-code') === 'ShiftRight') {
+            shiftIsPressed = true;
+            this.makeValues();
         }
         else if (value.target.getAttribute('data-code') === 'Space') {
             placeholder = placeholder.slice(0, cursor) + ' ' + placeholder.slice(cursor);
@@ -113,6 +166,10 @@ class Keyboard {
                 placeholder = placeholder.slice(0, cursor) + placeholder.slice(cursor + 1);
             }
         }
+        else if (value.target.getAttribute('data-code') === 'CapsLock') {
+            value.target.classList.toggle('active');
+            this.makeValues();
+        }
         textArea.onblur = function() {
             if (value.target.hasAttribute('data-code')) {
                 textArea.focus();
@@ -122,12 +179,23 @@ class Keyboard {
         textArea.setSelectionRange(cursor, cursor)
     }
 
+    showValueMouseUp(value) {
+        if (value.target.getAttribute('data-code') === 'ShiftLeft' || value.target.getAttribute('data-code') === 'ShiftRight') {
+            shiftIsPressed = false;
+            this.makeValues();
+        }
+    }
+
     showValueKeyboardDown(event) {
         let cursor = textArea.selectionStart;
         let element = document.querySelector(`[data-code=${event.code}]`);
         if (event.code === 'Enter') {
             placeholder = placeholder.slice(0, cursor) + '\n' + placeholder.slice(cursor);
             cursor++;
+        }
+        else if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
+            shiftIsPressed = true;
+            this.makeValues();
         }
         else if (event.code === 'Space') {
             placeholder = placeholder.slice(0, cursor) + ' ' + placeholder.slice(cursor);
@@ -148,10 +216,10 @@ class Keyboard {
                 placeholder = placeholder.slice(0, cursor) + placeholder.slice(cursor + 1);
             }
         }
-        else if (event.code === 'ControlLeft') {
+        else if (event.code === 'ControlLeft' || event.code === 'ControlRight') {
             ctrlIsPressed = true;
         }
-        else if (ctrlIsPressed && event.code === 'AltLeft') {
+        else if (ctrlIsPressed && event.code === 'AltLeft' || ctrlIsPressed && event.code === 'AltRight') {
             if (localStorage.getItem('lang') === 'russian') {
                 localStorage.setItem("lang", 'english');
             } else {
@@ -163,17 +231,28 @@ class Keyboard {
             placeholder = placeholder.slice(0, cursor) + element.innerHTML + placeholder.slice(cursor);
             cursor++;
         }
-        element.classList.add('active');
+        if (event.code === 'CapsLock') {
+            element.classList.toggle('active');
+            this.makeValues();
+        } else {
+            element.classList.add('active');
+        }
         textArea.value = placeholder;
         textArea.setSelectionRange(cursor, cursor)
     }
 
     showValueKeyboardUp(event) {
-        if (event.code === 'ControlLeft') {
+        if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
+            shiftIsPressed = false;
+            this.makeValues();
+        }
+        if (event.code === 'ControlLeft' || event.code === 'ControlRight') {
             ctrlIsPressed = false;
         }
-        let element = document.querySelector(`[data-code=${event.code}]`);
-        element.classList.remove('active');
+        if (event.code !== 'CapsLock') {
+            let element = document.querySelector(`[data-code=${event.code}]`);
+            element.classList.remove('active');
+        }
     }
 }
 
@@ -182,6 +261,10 @@ class Keyboard {
 
 keyboard.addEventListener("mousedown", function(){
     new Keyboard().showValueMouse(event);
+}, false);
+
+keyboard.addEventListener("mouseup", function(){
+    new Keyboard().showValueMouseUp(event);
 }, false);
 
 document.addEventListener("keydown", function(){
