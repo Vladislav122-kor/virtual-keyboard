@@ -419,7 +419,7 @@ class Keyboard {
             }
             this.makeValues();
         }
-        else if (element.className === 'keys') {
+        else if (element.className === 'keys' || element.className === 'keys active') {
             placeholder = placeholder.slice(0, cursor) + element.innerHTML + placeholder.slice(cursor);
             cursor++;
         }
