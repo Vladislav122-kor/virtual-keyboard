@@ -42,20 +42,20 @@ class Keyboard {
     constructor(value) {
         this.english = ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace', 'Tab', 'q', 'w', 
         'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\', 'Del', 'CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 
-        'k', 'l', ';', "'", 'Enter', 'Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '', 'Shift', 'Ctrl', 
-        'Win', 'Alt', '', 'Alt', '', '', '', 'Ctrl'];
+        'k', 'l', ';', "'", 'Enter', 'Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '&#9650', 'Shift', 'Ctrl', 
+        'Win', 'Alt', '', 'Alt', '&#9664', '&#9660', '&#9654', 'Ctrl'];
         this.russian = ['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace', 'Tab', 'й', 'ц', 
         'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\', 'Del', 'CapsLock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 
-        'л', 'д', 'ж', "э", 'Enter', 'Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', '', 'Shift', 'Ctrl', 
-        'Win', 'Alt', '', 'Alt', '', '', '', 'Ctrl'];
-        this.englishShift = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', 'Backspace', 'Tab', 'Q', 
+        'л', 'д', 'ж', "э", 'Enter', 'Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', '&#9650', 'Shift', 'Ctrl', 
+        'Win', 'Alt', '', 'Alt', '&#9664', '&#9660', '&#9654', 'Ctrl'];
+        this.englishShift = ['~', '!', '@', '#', '$', '%', '^', '&#949', '*', '(', ')', '_', '+', 'Backspace', 'Tab', 'Q', 
         'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', '|', 'Del', 'CapsLock', 'A', 'S', 'D', 'F', 'G', 'H', 
-        'J', 'K', 'L', ':', '"', 'Enter', 'Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', '', 'Shift', 'Ctrl', 
-        'Win', 'Alt', '', 'Alt', '', '', '', 'Ctrl'];
+        'J', 'K', 'L', ':', '"', 'Enter', 'Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '&#706', '&#707', '?', '&#9650', 'Shift', 'Ctrl', 
+        'Win', 'Alt', '', 'Alt', '&#9664', '&#9660', '&#9654', 'Ctrl']; 	
         this.russianShift = ['Ё', '!', '"', '№', ';', '%', ':', '?', '*', '(', ')', '_', '+', 'Backspace', 'Tab', 'Й', 
         'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', '/', 'Del', 'CapsLock', 'Ф', 'Ы', 'В', 'А', 'П', 'Р', 
-        'О', 'Л', 'Д', 'Ж', 'Э', 'Enter', 'Shift', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', ',', '', 'Shift', 'Ctrl', 
-        'Win', 'Alt', '', 'Alt', '', '', '', 'Ctrl'];
+        'О', 'Л', 'Д', 'Ж', 'Э', 'Enter', 'Shift', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', ',', '&#9650', 'Shift', 'Ctrl', 
+        'Win', 'Alt', '', 'Alt', '&#9664', '&#9660', '&#9654', 'Ctrl'];
         this.code = ['Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 
         'Digit9', 'Digit0', 'Minus', 'Equal', 'Backspace', 'Tab', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 
         'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash', 'Delete', 'CapsLock', 'KeyA', 
@@ -63,6 +63,7 @@ class Keyboard {
         'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', 'ArrowUp', 'ShiftRight', 
         'ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 
         'ControlRight'];
+        this.arrows = [60, 62];
         this.dark = [13, 14, 28, 29, 41, 42, 53, 54, 55, 56, 57, 59, 60, 61, 62, 63];
         this.long = [13, 29, 42];
         this.middle = [41, 54];
@@ -78,6 +79,9 @@ class Keyboard {
             if (this.dark.includes(i)) { key.classList.add('dark') }
             if (this.long.includes(i)) { key.classList.add('long') }
             if (this.middle.includes(i)) { key.classList.add('middle') }
+            if (this.arrows.includes(i)) { 
+                key.style.fontSize = '22px';
+             }
             if (this.small.includes(i)) { key.classList.add('small') }
             if (i === 58) { key.classList.add('very_long') }
             keyboard.appendChild(key);
@@ -147,6 +151,100 @@ class Keyboard {
             shiftIsPressed = true;
             this.makeValues();
         }
+        else if (value.target.getAttribute('data-code') === 'ArrowLeft') {
+            if (cursor !== 0) { cursor-- }
+        }
+        else if (value.target.getAttribute('data-code') === 'ArrowRight') {
+            cursor++;
+        }
+        else if (value.target.getAttribute('data-code') === 'ArrowUp') {
+            let obj = {};
+            let strings = 1;
+            let elements = 1;
+            for (let i = 0; i < placeholder.length; i++) {
+                if (placeholder[i] === '\n') {
+                    obj[strings] = elements;
+                    elements = 0;
+                    strings++;
+                } 
+                else if (i !== 0 && elements % 69 === 0) {
+                    elements = 1;
+                    strings++;
+                } 
+                obj[strings] = elements;
+                elements++;
+            }
+            let count = 0;
+            let last = '';
+            for (let elem of Object.keys(obj)) {
+                last = elem;
+            }
+            obj[last] = obj[last] + 1;
+            for (let elem of Object.entries(obj)) {
+                if (count !== false) {
+                    count += elem[1];
+                    if (cursor < count) {
+                        if (elem[0] === '1') {
+                            count = false;
+                        } 
+                        else if (obj[elem[0] - 1] - (elem[1] - (count - cursor)) <= 0) {
+                            cursor = count - elem[1] - 1;
+                            count = false;
+                        }
+                        else {
+                            cursor -= obj[elem[0] - 1];
+                            count = false;
+                        }
+                    }
+                }
+            }
+        }
+        else if (value.target.getAttribute('data-code') === 'ArrowDown') {
+            let obj = {};
+            let strings = 1;
+            let elements = 1;
+            for (let i = 0; i < placeholder.length; i++) {
+                if (placeholder[i] === '\n') {
+                    obj[strings] = elements;
+                    elements = 0;
+                    strings++;
+                } 
+                else if (i !== 0 && elements % 69 === 0) {
+                    elements = 1;
+                    strings++;
+                } 
+                obj[strings] = elements;
+                elements++;
+            }
+            let count = 0;
+            let last = '';
+            for (let elem of Object.keys(obj)) {
+                last = elem;
+            }
+            obj[last] = obj[last] + 1;
+            console.log(obj);
+            for (let elem of Object.entries(obj)) {
+                if (count !== false) {
+                    count += elem[1];
+                    if (cursor < count) {
+                        if (elem[0] === last) {
+                            count = false;
+                            console.log(0)
+                        } 
+                        else if (obj[+(elem[0]) + 1] - (elem[1] - (count - cursor)) <= 0) {
+                            cursor += ((count - cursor - 1) + obj[+(elem[0]) + 1]);
+                            count = false;
+                            console.log(1)
+                        }
+                        else {
+                            cursor += obj[+(elem[0])];
+                            count = false;
+                            console.log(2)
+                        }
+                    }
+                }
+            }
+        }
         else if (value.target.getAttribute('data-code') === 'Space') {
             placeholder = placeholder.slice(0, cursor) + ' ' + placeholder.slice(cursor);
             cursor++;
@@ -197,6 +295,100 @@ class Keyboard {
             shiftIsPressed = true;
             this.makeValues();
         }
+        else if (event.code === 'ArrowLeft') {
+            if (cursor !== 0) { cursor-- }
+        }
+        else if (event.code === 'ArrowRight') {
+            cursor++;
+        }
+        else if (event.code === 'ArrowUp') {
+            let obj = {};
+            let strings = 1;
+            let elements = 1;
+            for (let i = 0; i < placeholder.length; i++) {
+                if (placeholder[i] === '\n') {
+                    obj[strings] = elements;
+                    elements = 0;
+                    strings++;
+                } 
+                else if (i !== 0 && elements % 69 === 0) {
+                    elements = 1;
+                    strings++;
+                } 
+                obj[strings] = elements;
+                elements++;
+            }
+            let count = 0;
+            let last = '';
+            for (let elem of Object.keys(obj)) {
+                last = elem;
+            }
+            obj[last] = obj[last] + 1;
+            for (let elem of Object.entries(obj)) {
+                if (count !== false) {
+                    count += elem[1];
+                    if (cursor < count) {
+                        if (elem[0] === '1') {
+                            count = false;
+                        } 
+                        else if (obj[elem[0] - 1] - (elem[1] - (count - cursor)) <= 0) {
+                            cursor = count - elem[1] - 1;
+                            count = false;
+                        }
+                        else {
+                            cursor -= obj[elem[0] - 1];
+                            count = false;
+                        }
+                    }
+                }
+            }
+        }
+        else if (event.code === 'ArrowDown') {
+            let obj = {};
+            let strings = 1;
+            let elements = 1;
+            for (let i = 0; i < placeholder.length; i++) {
+                if (placeholder[i] === '\n') {
+                    obj[strings] = elements;
+                    elements = 0;
+                    strings++;
+                } 
+                else if (i !== 0 && elements % 69 === 0) {
+                    elements = 1;
+                    strings++;
+                } 
+                obj[strings] = elements;
+                elements++;
+            }
+            let count = 0;
+            let last = '';
+            for (let elem of Object.keys(obj)) {
+                last = elem;
+            }
+            obj[last] = obj[last] + 1;
+            console.log(obj);
+            for (let elem of Object.entries(obj)) {
+                if (count !== false) {
+                    count += elem[1];
+                    if (cursor < count) {
+                        if (elem[0] === last) {
+                            count = false;
+                            console.log(0)
+                        } 
+                        else if (obj[+(elem[0]) + 1] - (elem[1] - (count - cursor)) <= 0) {
+                            cursor += ((count - cursor - 1) + obj[+(elem[0]) + 1]);
+                            count = false;
+                            console.log(1)
+                        }
+                        else {
+                            cursor += obj[+(elem[0])];
+                            count = false;
+                            console.log(2)
+                        }
+                    }
+                }
+            }
+        }
         else if (event.code === 'Space') {
             placeholder = placeholder.slice(0, cursor) + ' ' + placeholder.slice(cursor);
             cursor++;
@@ -238,7 +430,7 @@ class Keyboard {
             element.classList.add('active');
         }
         textArea.value = placeholder;
-        textArea.setSelectionRange(cursor, cursor)
+        textArea.setSelectionRange(cursor, cursor);
     }
 
     showValueKeyboardUp(event) {
